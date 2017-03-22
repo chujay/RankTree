@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		066046C61E8130A400149700 /* Schedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046C51E8130A400149700 /* Schedules.swift */; };
+		066046C81E8209B200149700 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046C71E8209B200149700 /* TimeViewController.swift */; };
+		066046CF1E826A6E00149700 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046CE1E826A6E00149700 /* MapViewController.swift */; };
 		069FC5E21E80BAC800012CE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E11E80BAC800012CE2 /* AppDelegate.swift */; };
 		069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E31E80BAC800012CE2 /* ViewController.swift */; };
 		069FC5E71E80BAC800012CE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069FC5E51E80BAC800012CE2 /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		066046C51E8130A400149700 /* Schedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedules.swift; sourceTree = "<group>"; };
+		066046C71E8209B200149700 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		066046CE1E826A6E00149700 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		069FC5DE1E80BAC800012CE2 /* RankTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069FC5E11E80BAC800012CE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		069FC5E31E80BAC800012CE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +43,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		066046C31E81303600149700 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		066046C41E81305400149700 /* Schedules */ = {
+			isa = PBXGroup;
+			children = (
+				066046C51E8130A400149700 /* Schedules.swift */,
+			);
+			name = Schedules;
+			sourceTree = "<group>";
+		};
+		066046CD1E82498600149700 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		069FC5D51E80BAC800012CE2 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +84,9 @@
 		069FC5E01E80BAC800012CE2 /* RankTree */ = {
 			isa = PBXGroup;
 			children = (
+				066046CD1E82498600149700 /* Cell */,
+				066046C41E81305400149700 /* Schedules */,
+				066046C31E81303600149700 /* Users */,
 				069FC5E11E80BAC800012CE2 /* AppDelegate.swift */,
 				069FC5E31E80BAC800012CE2 /* ViewController.swift */,
 				069FC5E51E80BAC800012CE2 /* Main.storyboard */,
@@ -63,6 +94,8 @@
 				069FC5ED1E80BAC800012CE2 /* LaunchScreen.storyboard */,
 				069FC5F01E80BAC800012CE2 /* Info.plist */,
 				069FC5E81E80BAC800012CE2 /* RankTree.xcdatamodeld */,
+				066046C71E8209B200149700 /* TimeViewController.swift */,
+				066046CE1E826A6E00149700 /* MapViewController.swift */,
 			);
 			path = RankTree;
 			sourceTree = "<group>";
@@ -140,8 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				066046C81E8209B200149700 /* TimeViewController.swift in Sources */,
+				066046CF1E826A6E00149700 /* MapViewController.swift in Sources */,
 				069FC5EA1E80BAC800012CE2 /* RankTree.xcdatamodeld in Sources */,
 				069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */,
+				066046C61E8130A400149700 /* Schedules.swift in Sources */,
 				069FC5E21E80BAC800012CE2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +342,7 @@
 				069FC5F51E80BAC800012CE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
