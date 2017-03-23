@@ -11,8 +11,10 @@ import CVCalendar
 
 class TimeViewController: UIViewController{
     
+    @IBOutlet weak var theTime: UILabel!
     let menuView = CVCalendarMenuView()
     let calendarView = CVCalendarView()
+    var scheduleTime = ["Day": "", "Time": ""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +65,33 @@ extension TimeViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
     func presentedDateUpdated(_ date: CVDate) {
         self.navigationItem.title = date.globalDescription
     }
+    
     func didSelectDayView(_ dayView: DayView, animationDidFinish: Bool) {
         print("========Time Data(for day)=========")
-        print(dayView.date.description)
+        print(dayView.date.commonDescription)
         
+        let alert = UIAlertController(title: "Select time", message: "\n\n\n\n\n", preferredStyle: .actionSheet)
+        let datePickerView = UIDatePicker(frame: CGRect(x: 0, y: 50, width: alert.view.frame.width, height: 100))
+        datePickerView.datePickerMode = .time
+        datePickerView.date = Date()
+        datePickerView.addTarget(self, action: #selector(self.timeChanged), for: .valueChanged)
+        alert.view.addSubview(datePickerView)
+        let okAction = UIAlertAction(title: "Confirm", style: .default, handler: { action in
+            self.scheduleTime["Day"] = dayView.date.commonDescription
+            self.theTime.text = "\(self.scheduleTime["Day"]!) and \(self.scheduleTime["Time"]!)"
+        })
         
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func timeChanged(_ sender: UIDatePicker) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = DateFormatter.Style.none
+        timeFormatter.timeStyle = DateFormatter.Style.medium
+        print(timeFormatter.string(from: sender.date))
+        self.scheduleTime["Time"] = timeFormatter.string(from: sender.date)
     }
     
 }
