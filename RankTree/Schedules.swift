@@ -6,34 +6,30 @@
 //  Copyright © 2017 Chujay. All rights reserved.
 //
 
-enum Level {
-    case low
-    case medium
-    case high
-}
-
 struct Schedules{
     
     var title: String
-    var time: String
-    let location: String?
+    var startTime: String
+    var endTime: String
     let context: String?
-    let level: Level
+    let level: String
     
-    init(title: String, time: String, location: String, context: String, level: Level) {
+    init(title: String, startTime: String, endTime: String, context: String, level: String) {
         self.title = title
         self.context = context
         self.level = level
-        self.time = time
-        self.location = location
+        self.startTime = startTime
+        self.endTime = endTime
     }
     
-    init(title: String, time: String) {
-        self.title = title
-        self.time = time
-        self.context = ""
-        self.level = .medium
-        self.location = nil
+    func toAnyObject() -> Any{
+        return [
+            "title" : self.title,
+            "description": self.context,
+            "startTime": self.startTime,
+            "endTime": self.endTime,
+            "level": self.level
+        ]
     }
 }
 

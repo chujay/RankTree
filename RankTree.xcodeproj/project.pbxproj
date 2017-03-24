@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062C71861E84F8FC00F00BAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 062C71851E84F8FC00F00BAD /* GoogleService-Info.plist */; };
 		066046C61E8130A400149700 /* Schedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046C51E8130A400149700 /* Schedules.swift */; };
 		066046C81E8209B200149700 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046C71E8209B200149700 /* TimeViewController.swift */; };
 		066046CF1E826A6E00149700 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046CE1E826A6E00149700 /* MapViewController.swift */; };
+		066424A71E8517440000DC83 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066424A61E8517440000DC83 /* DataService.swift */; };
 		069FC5E21E80BAC800012CE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E11E80BAC800012CE2 /* AppDelegate.swift */; };
 		069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E31E80BAC800012CE2 /* ViewController.swift */; };
 		069FC5E71E80BAC800012CE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069FC5E51E80BAC800012CE2 /* Main.storyboard */; };
@@ -20,9 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		062C71851E84F8FC00F00BAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		066046C51E8130A400149700 /* Schedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedules.swift; sourceTree = "<group>"; };
 		066046C71E8209B200149700 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		066046CE1E826A6E00149700 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		066424A61E8517440000DC83 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		069FC5DE1E80BAC800012CE2 /* RankTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069FC5E11E80BAC800012CE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		069FC5E31E80BAC800012CE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,45 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
+		066424A21E84FC590000DC83 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				069FC5E31E80BAC800012CE2 /* ViewController.swift */,
+				066046C71E8209B200149700 /* TimeViewController.swift */,
+				066046CE1E826A6E00149700 /* MapViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		066424A31E84FC6B0000DC83 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				069FC5E11E80BAC800012CE2 /* AppDelegate.swift */,
+				069FC5EB1E80BAC800012CE2 /* Assets.xcassets */,
+				069FC5F01E80BAC800012CE2 /* Info.plist */,
+				069FC5E81E80BAC800012CE2 /* RankTree.xcdatamodeld */,
+				062C71851E84F8FC00F00BAD /* GoogleService-Info.plist */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		066424A41E84FC880000DC83 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				069FC5E51E80BAC800012CE2 /* Main.storyboard */,
+				069FC5ED1E80BAC800012CE2 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		066424A51E85172D0000DC83 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				066424A61E8517440000DC83 /* DataService.swift */,
+			);
+			name = Firebase;
+			sourceTree = "<group>";
+		};
 		069FC5D51E80BAC800012CE2 = {
 			isa = PBXGroup;
 			children = (
@@ -91,18 +134,13 @@
 		069FC5E01E80BAC800012CE2 /* RankTree */ = {
 			isa = PBXGroup;
 			children = (
+				066424A51E85172D0000DC83 /* Firebase */,
+				066424A41E84FC880000DC83 /* Storyboard */,
+				066424A31E84FC6B0000DC83 /* other */,
+				066424A21E84FC590000DC83 /* ViewController */,
 				066046CD1E82498600149700 /* Cell */,
 				066046C41E81305400149700 /* Schedules */,
 				066046C31E81303600149700 /* Users */,
-				069FC5E11E80BAC800012CE2 /* AppDelegate.swift */,
-				069FC5E31E80BAC800012CE2 /* ViewController.swift */,
-				069FC5E51E80BAC800012CE2 /* Main.storyboard */,
-				069FC5EB1E80BAC800012CE2 /* Assets.xcassets */,
-				069FC5ED1E80BAC800012CE2 /* LaunchScreen.storyboard */,
-				069FC5F01E80BAC800012CE2 /* Info.plist */,
-				069FC5E81E80BAC800012CE2 /* RankTree.xcdatamodeld */,
-				066046C71E8209B200149700 /* TimeViewController.swift */,
-				066046CE1E826A6E00149700 /* MapViewController.swift */,
 			);
 			path = RankTree;
 			sourceTree = "<group>";
@@ -188,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069FC5EF1E80BAC800012CE2 /* LaunchScreen.storyboard in Resources */,
+				062C71861E84F8FC00F00BAD /* GoogleService-Info.plist in Resources */,
 				069FC5EC1E80BAC800012CE2 /* Assets.xcassets in Resources */,
 				069FC5E71E80BAC800012CE2 /* Main.storyboard in Resources */,
 			);
@@ -249,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				066046C81E8209B200149700 /* TimeViewController.swift in Sources */,
+				066424A71E8517440000DC83 /* DataService.swift in Sources */,
 				066046CF1E826A6E00149700 /* MapViewController.swift in Sources */,
 				069FC5EA1E80BAC800012CE2 /* RankTree.xcdatamodeld in Sources */,
 				069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */,

@@ -7,4 +7,7 @@ target 'RankTree' do
 
   # Pods for RankTree
   pod 'CVCalendar', '~> 1.4.1'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 end

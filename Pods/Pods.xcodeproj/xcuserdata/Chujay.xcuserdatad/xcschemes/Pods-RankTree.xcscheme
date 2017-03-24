@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ACB0338BDF4E14A5A594080C4E3192C3"
+               BlueprintIdentifier = "1B7E9280AEEC73F5945D31FFCE2F3F2B"
                BuildableName = "Pods_RankTree.framework"
                BlueprintName = "Pods-RankTree"
                ReferencedContainer = "container:../../../../Volumes/Macintosh SSD/User/Documents/RankTree/Pods/Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ACB0338BDF4E14A5A594080C4E3192C3"
+            BlueprintIdentifier = "1B7E9280AEEC73F5945D31FFCE2F3F2B"
             BuildableName = "Pods_RankTree.framework"
             BlueprintName = "Pods-RankTree"
             ReferencedContainer = "container:../../../../Volumes/Macintosh SSD/User/Documents/RankTree/Pods/Pods.xcodeproj">
