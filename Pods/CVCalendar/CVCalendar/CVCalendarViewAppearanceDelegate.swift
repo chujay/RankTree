@@ -44,7 +44,7 @@ public protocol CVCalendarViewAppearanceDelegate {
     @objc optional func dayLabelPresentWeekdayTextSize() -> CGFloat
     @objc optional func dayLabelPresentWeekdayHighlightedTextSize() -> CGFloat
     @objc optional func dayLabelPresentWeekdaySelectedTextSize() -> CGFloat
-    
+
     // Background Color & Alpha
     @objc optional func dayLabelBackgroundColor(by weekDay: Weekday, status: CVStatus, present: CVPresent) -> UIColor?
     // Highlighted state background & alpha.
@@ -61,7 +61,7 @@ public protocol CVCalendarViewAppearanceDelegate {
 
     // Dot marker default color.
     @objc optional func dotMarkerColor() -> UIColor
-  
+
     // Top marker default color.
     @objc optional func topMarkerColor() -> UIColor
 }

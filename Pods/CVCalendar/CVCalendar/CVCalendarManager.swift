@@ -43,7 +43,7 @@ public final class CVCalendarManager {
         monthStartDate: Foundation.Date, monthEndDate: Foundation.Date) {
             var calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
             calendar.firstWeekday = starterWeekday
-            
+
             let units = (yearUnit.union(monthUnit).union(weekUnit))
             var components = (calendar as NSCalendar).components(units, from: date)
 
@@ -77,7 +77,7 @@ public final class CVCalendarManager {
 
     public func weekdayForDate(_ date: Foundation.Date) -> Int {
         let units = weekdayUnit
-        
+
         var calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
         calendar.firstWeekday = starterWeekday
 
@@ -94,7 +94,7 @@ public final class CVCalendarManager {
 
     public func weeksWithWeekdaysForMonthDate(_ date: Foundation.Date) ->
         (weeksIn: [[Int : [Int]]], weeksOut: [[Int : [Int]]]) {
-            
+
             var calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
             calendar.firstWeekday = starterWeekday
 
@@ -125,8 +125,7 @@ public final class CVCalendarManager {
                 var components = Manager.componentsForDate(firstMonthDateIn, calendar: calendar)
                 for _ in 1...7 {
                     components.day! -= 1
-                    
-                    
+
                     let updatedDate = calendar.date(from: components)!
                     let updatedDateWeekday = self.weekdayForDate(updatedDate)
                     if updatedDateWeekday == self.starterWeekday {
@@ -174,14 +173,14 @@ public final class CVCalendarManager {
 
             // Dictionaries.
 
-            var weeksIn = [[Int : [Int]]]()
-            var weeksOut = [[Int : [Int]]]()
+            var weeksIn = [[Int: [Int]]]()
+            var weeksOut = [[Int: [Int]]]()
 
             let count = firstWeekDates.count
 
             for i in 0..<count {
-                var weekdaysIn = [Int : [Int]]()
-                var weekdaysOut = [Int : [Int]]()
+                var weekdaysIn = [Int: [Int]]()
+                var weekdaysOut = [Int: [Int]]()
 
                 let firstWeekDate = firstWeekDates[i]
                 let lastWeekDate = lastWeekDates[i]

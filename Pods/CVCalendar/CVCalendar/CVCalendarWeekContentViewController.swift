@@ -13,15 +13,15 @@ public final class CVCalendarWeekContentViewController: CVCalendarContentViewCon
     fileprivate var monthViews: [Identifier : MonthView]
 
     public override init(calendarView: CalendarView, frame: CGRect) {
-        weekViews = [Identifier : WeekView]()
-        monthViews = [Identifier : MonthView]()
+        weekViews = [Identifier: WeekView]()
+        monthViews = [Identifier: MonthView]()
         super.init(calendarView: calendarView, frame: frame)
         initialLoad(Foundation.Date())
     }
 
     public init(calendarView: CalendarView, frame: CGRect, presentedDate: Foundation.Date) {
-        weekViews = [Identifier : WeekView]()
-        monthViews = [Identifier : MonthView]()
+        weekViews = [Identifier: WeekView]()
+        monthViews = [Identifier: MonthView]()
         super.init(calendarView: calendarView, frame: frame)
         presentedMonthView = MonthView(calendarView: calendarView, date: presentedDate)
         presentedMonthView.updateAppearance(bounds)
@@ -136,7 +136,7 @@ public final class CVCalendarWeekContentViewController: CVCalendarContentViewCon
 
     public override func performedDayViewSelection(_ dayView: DayView) {
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
-        
+
         if dayView.isOut && calendarView.shouldScrollOnOutDayViewSelection {
             if dayView.date.day > 20 {
                 let presentedDate = dayView.monthView.date
@@ -225,7 +225,7 @@ public final class CVCalendarWeekContentViewController: CVCalendarContentViewCon
     fileprivate var togglingBlocked = false
     public override func togglePresentedDate(_ date: Foundation.Date) {
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
-        
+
         let presentedDate = CVDate(date: date, calendar: calendar)
         guard let _ = monthViews[presented],
             let presentedWeekView = weekViews[presented],
@@ -439,7 +439,7 @@ extension CVCalendarWeekContentViewController {
                 }
             }
         }
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
 
         if let presentedWeekView = weekViews[presented],
@@ -474,7 +474,7 @@ extension CVCalendarWeekContentViewController {
         let coordinator = calendarView.coordinator
         weekView.mapDayViews { dayView in
             if dayView.date.day == day && !dayView.isOut {
-                if let selected = coordinator?.selectedDayView , selected != dayView {
+                if let selected = coordinator?.selectedDayView, selected != dayView {
                     self.calendarView.didSelectDayView(dayView)
                 }
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -17,7 +17,6 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     return false
   }
 }
-
 
 public final class CVCalendarWeekView: UIView {
     // MARK: - Non public properties
@@ -52,14 +51,13 @@ public final class CVCalendarWeekView: UIView {
         if let monthView = monthView, let activeCalendarView = monthView.calendarView {
             calendarView = activeCalendarView
         }
-        
+
         return calendarView
     }
 
     // MARK: - Initialization
 
     public init(monthView: CVCalendarMonthView, index: Int) {
-
 
         self.monthView = monthView
         self.index = index
@@ -85,7 +83,6 @@ public final class CVCalendarWeekView: UIView {
                     for weekdaysOut in weeksOut {
                         if weekdaysOut.count == daysOut {
                             let manager = calendarView.manager
-
 
                             let key = weekdaysOut.keys.first!
                             let value = weekdaysOut[key]![0]
@@ -123,7 +120,7 @@ public final class CVCalendarWeekView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func mapDayViews(_ body: (DayView) -> ()) {
+    public func mapDayViews(_ body: (DayView) -> Void) {
         if let dayViews = dayViews {
             for dayView in dayViews {
                 body(dayView)

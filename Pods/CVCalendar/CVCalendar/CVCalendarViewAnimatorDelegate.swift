@@ -10,6 +10,6 @@ import UIKit
 
 @objc
 public protocol CVCalendarViewAnimatorDelegate {
-    func selectionAnimation() -> ((DayView, @escaping ((Bool) -> ())) -> ())
-    func deselectionAnimation() -> ((DayView, @escaping ((Bool) -> ())) -> ())
+    func selectionAnimation() -> ((DayView, @escaping ((Bool) -> Void)) -> Void)
+    func deselectionAnimation() -> ((DayView, @escaping ((Bool) -> Void)) -> Void)
 }

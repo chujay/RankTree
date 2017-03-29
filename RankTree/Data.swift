@@ -8,34 +8,52 @@
 
 import Foundation
 
-class Data{
+class Data {
+
+    static var scheduleArray: [Schedules] = []
+
+    var startTime = [
+        [2017, 3, 28, 2, 51],
+        [2017, 3, 26, 9, 21],
+        [2017, 3, 27, 10, 27],
+        [2017, 3, 28, 8, 8],
+        [2017, 3, 26, 8, 12],
+        [2017, 3, 27, 1, 20],
+        [2017, 3, 27, 5, 5],
+        [2017, 3, 28, 0, 47],
+        [2017, 3, 26, 2, 46],
+        [2017, 3, 28, 10, 41]
+    ]
     
-    func produceData() -> [Schedules]{
+    var endTime = [
+        [2017, 3, 28, 2, 11],
+        [2017, 3, 27, 12, 11],
+        [2017, 3, 29, 14, 29],
+        [2017, 3, 30, 11, 53],
+        [2017, 3, 26, 8, 27],
+        [2017, 3, 27, 3, 17],
+        [2017, 3, 28, 7, 27],
+        [2017, 3, 29, 2, 34],
+        [2017, 3, 26, 6, 28],
+        [2017, 3, 28, 11, 8]
         
+    ]
+    
+    func produceData() {
+
         var scheduleData: [Schedules] = []
         var count = 0
-        while count < 10 {
-            let dayStart = arc4random_uniform(3) + 26
-            let hourStart = arc4random_uniform(12)
-            let minStart = arc4random_uniform(59)
+        while count < 3 {
             
-            let startTime = [2017, 3, dayStart, hourStart, minStart]
-            
-            let dayEnd = dayStart + arc4random_uniform(3)
-            let hourEnd = hourStart + arc4random_uniform(5)
-            let minEnd = arc4random_uniform(59)
-            
-            let endTime = [2017, 3, dayEnd, hourEnd, minEnd]
             let titleName = "Process\(count)"
             let context = ""
             let level = "Median level"
-            
-            let schedule = Schedules(title: titleName, startTime: startTime, endTime: endTime, context: context, level: level)
+
+            let schedule = Schedules(title: titleName, startTime: startTime[count], endTime: endTime[count], context: context, level: level)
             scheduleData.append(schedule)
             count += 1
         }
-        return scheduleData
+        Data.scheduleArray = scheduleData
     }
-    
-}
 
+}

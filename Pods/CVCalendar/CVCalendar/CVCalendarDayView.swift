@@ -60,9 +60,9 @@ public final class CVCalendarDayView: UIView {
             isUserInteractionEnabled = isHidden ? false : true
         }
     }
-    
+
     // MARK: - Private properties
-    
+
     fileprivate var preliminaryView: UIView?
     fileprivate var supplementaryView: UIView?
     fileprivate var dotColors = [UIColor]()
@@ -82,7 +82,7 @@ public final class CVCalendarDayView: UIView {
         }
 
         date = dateWithWeekView(weekView, andWeekIndex: weekdayIndex)
-        
+
         interactionSetup()
         labelSetup()
         setupDotMarker()
@@ -122,7 +122,7 @@ public final class CVCalendarDayView: UIView {
         } else {
             day = weekdaysIn![weekdayIndex]![0]
         }
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
 
         if day == monthView.currentDay && !isOut {
@@ -188,12 +188,11 @@ extension CVCalendarDayView {
         } else {
             color = appearance?.dayLabelWeekdayInTextColor
         }
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
         let weekDay = self.date?.weekDay(calendar: calendar) ?? .monday // Monday is default
         let status: CVStatus = {
-            if isDisabled { return .disabled }
-            else if isOut { return .out }
+            if isDisabled { return .disabled } else if isOut { return .out }
             return .in
         }()
         let present: CVPresent = isCurrentDay
@@ -201,13 +200,13 @@ extension CVCalendarDayView {
                 && calendarView.shouldAutoSelectDayOnMonthChange)
             ? .present
             : .not
-        
+
         dayLabel?.textColor = appearance?.delegate?.dayLabelColor?(by: weekDay, status: status, present: present) ?? color
         dayLabel?.font = appearance?.delegate?.dayLabelFont?(by: weekDay, status: status, present: present) ?? font
 
         addSubview(dayLabel)
     }
-    
+
     public func interactionSetup() {
         if let shouldSelect = calendarView.delegate?.shouldSelectDayView?(self) {
             self.isUserInteractionEnabled = shouldSelect
@@ -216,15 +215,14 @@ extension CVCalendarDayView {
 
     public func preliminarySetup() {
         if let delegate = calendarView.delegate,
-            let shouldShow = delegate.preliminaryView?(shouldDisplayOnDayView: self) , shouldShow {
+            let shouldShow = delegate.preliminaryView?(shouldDisplayOnDayView: self), shouldShow {
                 if let preView = delegate.preliminaryView?(viewOnDayView: self) {
                     preliminaryView?.removeFromSuperview()
                     preliminaryView = preView
                     weekView.insertSubview(preView, at: 0)
                     preView.layer.zPosition = CGFloat(-MAXFLOAT)
                 }
-        }
-        else {
+        } else {
             preliminaryView?.removeFromSuperview()
         }
     }
@@ -289,7 +287,7 @@ extension CVCalendarDayView {
         }
 
         if let delegate = calendarView.delegate {
-            if let shouldShow = delegate.dotMarker?(shouldShowOnDayView: self) , shouldShow {
+            if let shouldShow = delegate.dotMarker?(shouldShowOnDayView: self), shouldShow {
 
                 var (width, height): (CGFloat, CGFloat) = (13, 13)
                 if let size = delegate.dotMarker?(sizeOnDayView: self) {
@@ -306,7 +304,7 @@ extension CVCalendarDayView {
                 if colors!.count > 3 {
                     assert(false, "Only 3 dot markers allowed per day")
                 }
-                
+
                 dotColors = colors!
 
                 for (index, color) in (colors!).enumerated() {
@@ -365,7 +363,7 @@ extension CVCalendarDayView {
                     } else {
                         color = appearance?.dotMarkerColor
                     }
-                    
+
                     dotMarker.fillColor = color
                     dotMarker.setNeedsDisplay()
                 }
@@ -415,7 +413,6 @@ extension CVCalendarDayView {
         }
     }
 }
-
 
 // MARK: - Circle geometry
 
@@ -471,7 +468,7 @@ extension CVCalendarDayView {
         var backgroundColor: UIColor!
         var backgroundAlpha: CGFloat!
         var shape: CVShape!
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
         let weekDay = self.date?.weekDay(calendar: calendar) ?? .monday // Monday is default
         let present: CVPresent = isCurrentDay ? .present : .not
@@ -527,7 +524,7 @@ extension CVCalendarDayView {
             }
         }
 
-        if let selectionView = selectionView , selectionView.frame != dayLabel.bounds {
+        if let selectionView = selectionView, selectionView.frame != dayLabel.bounds {
             selectionView.frame = dayLabel.bounds
         } else {
             selectionView = CVAuxiliaryView(dayView: self, rect: dayLabel.bounds, shape: shape)
@@ -564,16 +561,15 @@ extension CVCalendarDayView {
             } else {
                 font = appearance.dayLabelWeekdayFont
             }
-            
+
             let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
             let weekDay = self.date?.weekDay(calendar: calendar) ?? .monday // Monday is default
             let status: CVStatus = {
-                if isDisabled { return .disabled }
-                else if isOut { return .out }
+                if isDisabled { return .disabled } else if isOut { return .out }
                 return .in
             }()
             let present: CVPresent = isCurrentDay ? .present : .not
-            
+
             dayLabel?.textColor = appearance.delegate?.dayLabelColor?(by: weekDay, status: status, present: present) ?? color
             dayLabel?.font = appearance.delegate?.dayLabelFont?(by: weekDay, status: status, present: present) ?? font
 
@@ -586,7 +582,6 @@ extension CVCalendarDayView {
         }
     }
 }
-
 
 // MARK: - Content reload
 

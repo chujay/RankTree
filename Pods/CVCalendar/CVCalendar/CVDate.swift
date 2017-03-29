@@ -49,7 +49,7 @@ extension CVDate {
         let components = (calendar as NSCalendar).components(NSCalendar.Unit.weekday, from: self.date)
         return Weekday(rawValue: components.weekday!)
     }
-    
+
     public func convertedDate(calendar: Calendar) -> Foundation.Date? {
         var comps = Manager.componentsForDate(Foundation.Date(), calendar: calendar)
 

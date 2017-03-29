@@ -12,13 +12,13 @@ public final class CVCalendarMonthContentViewController: CVCalendarContentViewCo
     fileprivate var monthViews: [Identifier : MonthView]
 
     public override init(calendarView: CalendarView, frame: CGRect) {
-        monthViews = [Identifier : MonthView]()
+        monthViews = [Identifier: MonthView]()
         super.init(calendarView: calendarView, frame: frame)
         initialLoad(presentedMonthView.date)
     }
 
     public init(calendarView: CalendarView, frame: CGRect, presentedDate: Foundation.Date) {
-        monthViews = [Identifier : MonthView]()
+        monthViews = [Identifier: MonthView]()
         super.init(calendarView: calendarView, frame: frame)
         presentedMonthView = MonthView(calendarView: calendarView, date: presentedDate)
         presentedMonthView.updateAppearance(scrollView.bounds)
@@ -35,7 +35,7 @@ public final class CVCalendarMonthContentViewController: CVCalendarContentViewCo
         insertMonthView(getPreviousMonth(date), withIdentifier: previous)
         insertMonthView(presentedMonthView, withIdentifier: presented)
         insertMonthView(getFollowingMonth(date), withIdentifier: following)
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
 
         presentedMonthView.mapDayViews { dayView in
@@ -138,7 +138,7 @@ public final class CVCalendarMonthContentViewController: CVCalendarContentViewCo
     public override func performedDayViewSelection(_ dayView: DayView) {
         if dayView.isOut && calendarView.shouldScrollOnOutDayViewSelection {
             let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
-            
+
             if dayView.date.day > 20 {
                 let presentedDate = dayView.monthView.date
                 calendarView.presentedDate = CVDate(date: self.dateBeforeDate(presentedDate!), calendar: calendar)
@@ -234,15 +234,15 @@ public final class CVCalendarMonthContentViewController: CVCalendarContentViewCo
     fileprivate var togglingBlocked = false
     public override func togglePresentedDate(_ date: Foundation.Date) {
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
-        
+
         let presentedDate = CVDate(date: date, calendar: calendar)
         guard let presentedMonth = monthViews[presented] else {
                 return
         }
-        
+
         var isMatchedDays = false
         var isMatchedMonths = false
-        
+
         // selectedDayView would be nil if shouldAutoSelectDayOnMonthChange returns false
         // we want to still allow the user to toggle to a date even if there is nothing selected
         if let selectedDate = calendarView.coordinator.selectedDayView?.date {
@@ -378,13 +378,13 @@ extension CVCalendarMonthContentViewController {
                 }
             }
         }
-        
+
         let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
 
         if let presentedMonthView = monthViews[presented] {
             self.presentedMonthView = presentedMonthView
             calendarView.presentedDate = CVDate(date: presentedMonthView.date, calendar: calendar)
-            
+
             if let selected = coordinator?.selectedDayView,
                 let selectedMonthView = selected.monthView ,
                 !matchedMonths(CVDate(date: selectedMonthView.date, calendar: calendar),
@@ -392,7 +392,7 @@ extension CVCalendarMonthContentViewController {
                     calendarView.shouldAutoSelectDayOnMonthChange {
                 let current = CVDate(date: Date(), calendar: calendar)
                 let presented = CVDate(date: presentedMonthView.date, calendar: calendar)
-                
+
                 if matchedMonths(current, presented) {
                     selectDayViewWithDay(current.day, inMonthView: presentedMonthView)
                 } else {
@@ -409,7 +409,7 @@ extension CVCalendarMonthContentViewController {
         let coordinator = calendarView.coordinator
         monthView.mapDayViews { dayView in
             if dayView.date.day == day && !dayView.isOut {
-                if let selected = coordinator?.selectedDayView , selected != dayView {
+                if let selected = coordinator?.selectedDayView, selected != dayView {
                     self.calendarView.didSelectDayView(dayView)
                 }
 

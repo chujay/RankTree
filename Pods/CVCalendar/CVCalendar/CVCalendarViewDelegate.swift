@@ -41,10 +41,9 @@ public protocol CVCalendarViewDelegate {
 
     @objc optional func supplementaryView(viewOnDayView dayView: DayView) -> UIView
     @objc optional func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool
-    
 
     @objc optional func didShowNextMonthView(_ date: Foundation.Date)
     @objc optional func didShowPreviousMonthView(_ date: Foundation.Date)
-    
+
     @objc optional func calendar() -> Calendar?
 }

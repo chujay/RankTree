@@ -75,10 +75,10 @@ public final class CVCalendarView: UIView {
         if let delegate = delegate, let should = delegate.shouldAnimateResizing?() {
             return should
         }
-        
+
         return true
     }
-    
+
     public var shouldAutoSelectDayOnMonthChange: Bool {
         if let delegate = delegate, let should = delegate.shouldAutoSelectDayOnMonthChange?() {
             return should
@@ -92,7 +92,7 @@ public final class CVCalendarView: UIView {
         }
         return true
     }
-    
+
     public var shouldScrollOnOutDayViewSelection: Bool {
         if let delegate = delegate, let should = delegate.shouldScrollOnOutDayViewSelection?() {
             return should
@@ -178,14 +178,14 @@ public final class CVCalendarView: UIView {
 
     public init() {
         currentOrientation = UIDevice.current.orientation
-        
+
         super.init(frame: CGRect.zero)
         isHidden = true
     }
 
     public override init(frame: CGRect) {
         currentOrientation = UIDevice.current.orientation
-        
+
         super.init(frame: frame)
         isHidden = true
     }
@@ -193,7 +193,7 @@ public final class CVCalendarView: UIView {
     // IB Initialization
     public required init?(coder aDecoder: NSCoder) {
         currentOrientation = UIDevice.current.orientation
-        
+
         super.init(coder: aDecoder)
         isHidden = true
     }
@@ -207,7 +207,7 @@ extension CVCalendarView {
             validated = false
             currentOrientation = UIDevice.current.orientation
         }
-    
+
         setNeedsLayout()
         layoutIfNeeded()
         if let _ = delegate, let contentController = contentController {
@@ -224,7 +224,7 @@ extension CVCalendarView {
 
                 let vSpace = appearance.spaceBetweenWeekViews!
                 let hSpace = appearance.spaceBetweenDayViews!
-                
+
                 if selfSize.height > maxHeight {
                     maxHeight = selfSize.height
                 }
@@ -299,7 +299,7 @@ extension CVCalendarView {
         contentController.presentPreviousView(nil)
     }
 
-    public func changeMode(_ mode: CalendarMode, completion: @escaping () -> () = {}) {
+    public func changeMode(_ mode: CalendarMode, completion: @escaping () -> Void = {}) {
         let calendar = self.delegate?.calendar?() ?? Calendar.current
         guard let selectedDate = coordinator.selectedDayView?.date.convertedDate(calendar: calendar) ,
             calendarMode != mode else {

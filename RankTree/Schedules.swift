@@ -6,25 +6,25 @@
 //  Copyright © 2017 Chujay. All rights reserved.
 //
 
-struct Schedules{
-    
+struct Schedules {
+
     var title: String
-    var startTime: Array<Any>
-    var endTime: Array<Any>
+    var startTime: [Int]
+    var endTime: [Int]
     let context: String
     let level: String
-    
-    init(title: String, startTime: Array<Any>, endTime: Array<Any>, context: String, level: String) {
+
+    init(title: String, startTime: [Int], endTime: [Int], context: String, level: String) {
         self.title = title
         self.context = context
         self.level = level
         self.startTime = startTime
         self.endTime = endTime
     }
-    
-    func toAnyObject() -> Any{
+
+    func toAnyObject() -> Any {
         return [
-            "title" : self.title,
+            "title": self.title,
             "description": self.context,
             "startTime": self.startTime,
             "endTime": self.endTime,
@@ -32,9 +32,3 @@ struct Schedules{
         ]
     }
 }
-
-
-
-
-
-

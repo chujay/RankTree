@@ -49,11 +49,11 @@ extension CVCalendarViewAnimator {
 // MARK: - CVCalendarViewAnimatorDelegate
 
 extension CVCalendarViewAnimator: CVCalendarViewAnimatorDelegate {
-    @objc public func selectionAnimation() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    @objc public func selectionAnimation() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return selectionWithBounceEffect()
     }
 
-    @objc public func deselectionAnimation() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    @objc public func deselectionAnimation() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return deselectionWithFadeOutEffect()
     }
 }
@@ -61,7 +61,7 @@ extension CVCalendarViewAnimator: CVCalendarViewAnimatorDelegate {
 // MARK: - Default animations
 
 private extension CVCalendarViewAnimator {
-    func selectionWithBounceEffect() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    func selectionWithBounceEffect() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return {
             dayView, completion in
             dayView.dayLabel?.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -77,7 +77,7 @@ private extension CVCalendarViewAnimator {
         }
     }
 
-    func deselectionWithBubbleEffect() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    func deselectionWithBubbleEffect() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return {
             dayView, completion in
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.6,
@@ -96,7 +96,7 @@ private extension CVCalendarViewAnimator {
         }
     }
 
-    func deselectionWithFadeOutEffect() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    func deselectionWithFadeOutEffect() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return {
             dayView, completion in
             UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.6,
@@ -112,7 +112,7 @@ private extension CVCalendarViewAnimator {
         }
     }
 
-    func deselectionWithRollingEffect() -> ((DayView, @escaping ((Bool) -> ())) -> ()) {
+    func deselectionWithRollingEffect() -> ((DayView, @escaping ((Bool) -> Void)) -> Void) {
         return {
             dayView, completion in
             UIView.animate(withDuration: 0.25, delay: 0,

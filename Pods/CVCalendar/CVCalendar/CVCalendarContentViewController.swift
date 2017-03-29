@@ -34,7 +34,7 @@ open class CVCalendarContentViewController: UIViewController {
     open var presentationEnabled = true
     open var lastContentOffset: CGFloat = 0
     open var direction: CVScrollDirection = .none
-  
+
     open var toggleDateAnimationDuration: Double {
         return calendarView.delegate?.toggleDateAnimationDuration?() ?? 0.8
     }
@@ -74,7 +74,7 @@ extension CVCalendarContentViewController {
     }
 }
 
-//MARK: - Month Refresh
+// MARK: - Month Refresh
 
 extension CVCalendarContentViewController {
     public func refreshPresentedMonth() {
@@ -89,7 +89,6 @@ extension CVCalendarContentViewController {
         }
     }
 }
-
 
 // MARK: Delete circle views (in effect refreshing the dayView circle)
 
@@ -107,7 +106,7 @@ extension CVCalendarContentViewController {
     }
 }
 
-//MARK: Delete dot views (in effect refreshing the dayView dots)
+// MARK: Delete dot views (in effect refreshing the dayView dots)
 
 extension CVCalendarContentViewController {
     func removeDotViews(_ dayView: CVCalendarDayView) {
@@ -199,7 +198,7 @@ extension CVCalendarContentViewController {
 
         var superStack = [UIView]()
         var currentView: UIView = calendarView
-        while let currentSuperview = currentView.superview , !(currentSuperview is UIWindow) {
+        while let currentSuperview = currentView.superview, !(currentSuperview is UIWindow) {
             superStack += [currentSuperview]
             currentView = currentSuperview
         }
@@ -221,7 +220,6 @@ extension CVCalendarContentViewController {
                     }
                 }
             }
-
 
             for constraintIn in calendarView.constraints where
                 constraintIn.firstAttribute == NSLayoutAttribute.height {
