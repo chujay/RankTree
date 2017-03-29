@@ -26,21 +26,23 @@ class ViewController: UIViewController {
     
     
     let items:[Item] = [.title, .context, .startTime ,.endTime, .level]
+    let date = Date()
+    let calendar = Calendar.current
     var schedules: [Schedules] = []
     var myDatePicker: UIDatePicker!
     var myDateLabel: UILabel!
     
     var itemTitle: String?
-    var startTime: String?
-    var endTime: String?
+    var startTime: Array<Any>?
+    var endTime: Array<Any>?
     var itemContext: String?
     var level: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         setUp()
     
     }
@@ -61,14 +63,14 @@ class ViewController: UIViewController {
     }
     
     func confirm(_ sender: Any) {
-        let rootRef = FIRDatabase.database().reference(withPath: "mySchedule")
         self.customView.isHidden = true
         let schedule = Schedules(title: self.itemTitle!, startTime: self.startTime!, endTime: self.endTime!, context: self.itemContext!, level: self.level!)
         schedules.append(schedule)
-        let scheduleItemRef = rootRef.child(String(schedules.count))
-        scheduleItemRef.setValue(schedule.toAnyObject())
-
         self.tableView.reloadData()
+        let year = String(calendar.component(.year, from: self.date))
+        let month = String(calendar.component(.month, from: self.date))
+        let day = String(calendar.component(.day, from: self.date))
+        self.schedules = RankData().rankTime(year: year, month: month, day: day)
         print(schedules)
     }
     
@@ -175,13 +177,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
         let item = self.items[indexPath.row]
         switch item {
         case .startTime:
-            let timeString = TimeViewController.scheduleTime["Day"]! + TimeViewController.scheduleTime["Time"]!
-            self.startTime = timeString
+            self.startTime = TimeViewController.scheduleTime
+            let timeString = "\(startTime![0]).\(startTime![1]).\(startTime![2])-\(startTime![3]):\(startTime![4])"
             tableView.cellForRow(at: indexPath)?.textLabel?.text = timeString
+            TimeViewController.scheduleTime.removeAll()
         case .endTime:
-            let timeString = TimeViewController.scheduleTime["Day"]! + TimeViewController.scheduleTime["Time"]!
-            self.endTime = timeString
+            self.endTime = TimeViewController.scheduleTime
+            let timeString = "\(endTime![0]).\(endTime![1]).\(endTime![2])-\(endTime![3]):\(endTime![4])"
             tableView.cellForRow(at: indexPath)?.textLabel?.text = timeString
+            TimeViewController.scheduleTime.removeAll()
         default:
             break
         }

@@ -9,12 +9,12 @@
 struct Schedules{
     
     var title: String
-    var startTime: String
-    var endTime: String
-    let context: String?
+    var startTime: Array<Any>
+    var endTime: Array<Any>
+    let context: String
     let level: String
     
-    init(title: String, startTime: String, endTime: String, context: String, level: String) {
+    init(title: String, startTime: Array<Any>, endTime: Array<Any>, context: String, level: String) {
         self.title = title
         self.context = context
         self.level = level
