@@ -57,7 +57,6 @@ class ViewController: UIViewController {
         self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: [todayCollectionView, suppleCollectionView])
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        print(supSchedules)
     }
 
     func setUp() {
@@ -90,8 +89,9 @@ class ViewController: UIViewController {
         let month = String(calendar.component(.month, from: self.date))
 //        let day = String(calendar.component(.day, from: self.date))
         self.schedules = RankData().rankTime(year: year, month: month, day: "28")
+        self.supSchedules.removeAll()
         self.todayCollectionView.reloadData()
-        print(schedules)
+        self.suppleCollectionView.reloadData()
     }
 
 }
@@ -223,7 +223,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
 
 }
 
-extension ViewController: KDDragAndDropCollectionViewDataSource {
+extension ViewController: KDDragAndDropCollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let collectionItem = [self.schedules, self.supSchedules]
@@ -271,7 +271,9 @@ extension ViewController: KDDragAndDropCollectionViewDataSource {
             }
         }
     }
-
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) {
 
         let collectionItem = self.collectionItems[collectionView.tag]
@@ -313,6 +315,21 @@ extension ViewController: KDDragAndDropCollectionViewDataSource {
             }
         }
         return nil
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let collectionItem = [self.schedules, self.supSchedules]
+        let title = collectionItem[collectionView.tag][indexPath.item].title
+        let startTime = collectionItem[collectionView.tag][indexPath.item].startTime
+        let endTime = collectionItem[collectionView.tag][indexPath.item].endTime
+        let level = collectionItem[collectionView.tag][indexPath.item].level
+        let messsage = "Title: \(title) \n Start time: \(startTime) \n End time: \(endTime) \n Level: \(level)"
+        let alert = UIAlertController(title: title, message: messsage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        
     }
 
 }
