@@ -79,10 +79,11 @@ extension TimeViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
             TimeViewController.scheduleTime.append(dayView.date.day)
             TimeViewController.scheduleTime.append(self.timeArray[0])
             TimeViewController.scheduleTime.append(self.timeArray[1])
+
         })
 
         alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
     func timeChanged(_ sender: UIDatePicker) {

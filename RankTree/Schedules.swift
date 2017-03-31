@@ -6,13 +6,13 @@
 //  Copyright © 2017 Chujay. All rights reserved.
 //
 
-struct Schedules {
+struct Schedules: Equatable {
 
-    var title: String
-    var startTime: [Int]
-    var endTime: [Int]
-    let context: String
-    let level: String
+    var title: String = " title "
+    var startTime: [Int] = [0, 0, 0, 0, 0]
+    var endTime: [Int] = [0, 0, 0, 0, 0]
+    var context: String = " "
+    var level: String = "Medium level"
 
     init(title: String, startTime: [Int], endTime: [Int], context: String, level: String) {
         self.title = title
@@ -31,4 +31,9 @@ struct Schedules {
             "level": self.level
         ]
     }
+
+    static func == (lhs: Schedules, rhs: Schedules) -> Bool {
+        return lhs.title == rhs.title && lhs.context == rhs.context && lhs.level == rhs.level && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime
+    }
+
 }

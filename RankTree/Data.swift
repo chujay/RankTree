@@ -24,7 +24,7 @@ class Data {
         [2017, 3, 26, 2, 46],
         [2017, 3, 28, 10, 41]
     ]
-    
+
     var endTime = [
         [2017, 3, 28, 2, 11],
         [2017, 3, 27, 12, 11],
@@ -36,15 +36,15 @@ class Data {
         [2017, 3, 29, 2, 34],
         [2017, 3, 26, 6, 28],
         [2017, 3, 28, 11, 8]
-        
+
     ]
-    
+
     func produceData() {
 
         var scheduleData: [Schedules] = []
         var count = 0
-        while count < 3 {
-            
+        while count < 10 {
+
             let titleName = "Process\(count)"
             let context = ""
             let level = "Median level"

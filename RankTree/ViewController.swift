@@ -9,28 +9,37 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+enum Item: String {
+    case title = "Title"
+    case startTime = "Start"
+    case endTime = "End"
+    case context = "Description"
+    case level = "Level"
+}
 
-    enum Item: String {
-        case title = "Title"
-        case startTime = "Start"
-        case endTime = "End"
-        case context = "Description"
-        case level = "Level"
-    }
+enum CollectionItem {
+    case todayItems
+    case supItems
+}
+
+class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addItems: UIButton!
     @IBOutlet weak var customView: UIView!
     @IBOutlet weak var confirmButton: UIButton!
-
+    @IBOutlet weak var todayCollectionView: UICollectionView!
+    @IBOutlet weak var suppleCollectionView: UICollectionView!
+    
     let items: [Item] = [.title, .context, .startTime, .endTime, .level]
+    let collectionItems: [CollectionItem] = [.todayItems, .supItems]
     let date = Date()
     let calendar = Calendar.current
     var schedules: [Schedules] = []
+    var supSchedules: [Schedules] = []
     var myDatePicker: UIDatePicker!
     var myDateLabel: UILabel!
-
+    var dragAndDropManager: KDDragAndDropManager?
     var itemTitle: String?
     var startTime: [Int]?
     var endTime: [Int]?
@@ -39,15 +48,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUp()
         Data().produceData() //Fake data
         let year = String(calendar.component(.year, from: self.date))
         let month = String(calendar.component(.month, from: self.date))
-        let day = String(calendar.component(.day, from: self.date))
-        self.schedules = RankData().rankTime(year: year, month: month, day: day)
+//        let day = String(calendar.component(.day, from: self.date))
+        self.schedules = RankData().rankTime(year: year, month: month, day: "28")
+        self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: [todayCollectionView, suppleCollectionView])
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        setUp()
-
+        print(supSchedules)
     }
 
     func setUp() {
@@ -58,13 +68,19 @@ class ViewController: UIViewController {
         self.customView.layer.borderColor = UIColor.gray.cgColor
         self.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         self.addItems.addTarget(self, action: #selector(addSchedule), for: .touchUpInside)
-
     }
 
     func addSchedule(_ sender: Any) {
         self.customView.isHidden = false
+        self.view.addSubview(customView)
+        self.customView.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 - 44)
     }
 
+    @IBAction func cancell(_ sender: Any) {
+
+        self.customView.isHidden = true
+        self.tableView.reloadData()
+    }
     func confirm(_ sender: Any) {
         self.customView.isHidden = true
         let schedule = Schedules(title: self.itemTitle!, startTime: self.startTime!, endTime: self.endTime!, context: self.itemContext!, level: self.level!)
@@ -72,9 +88,10 @@ class ViewController: UIViewController {
         self.tableView.reloadData()
         let year = String(calendar.component(.year, from: self.date))
         let month = String(calendar.component(.month, from: self.date))
-        let day = String(calendar.component(.day, from: self.date))
-        self.schedules = RankData().rankTime(year: year, month: month, day: day)
-        
+//        let day = String(calendar.component(.day, from: self.date))
+        self.schedules = RankData().rankTime(year: year, month: month, day: "28")
+        self.todayCollectionView.reloadData()
+        print(schedules)
     }
 
 }
@@ -183,13 +200,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
         switch item {
         case .startTime:
             let time = TimeViewController.scheduleTime
-            self.startTime = TimeViewController.scheduleTime as? [Int]
+            self.startTime = TimeViewController.scheduleTime
             let timeString = "\(time[0]).\(time[1]).\(time[2])-\(time[3]):\(time[4])"
             tableView.cellForRow(at: indexPath)?.textLabel?.text = timeString
             TimeViewController.scheduleTime.removeAll()
         case .endTime:
             let time = TimeViewController.scheduleTime
-            self.endTime = TimeViewController.scheduleTime as? [Int]
+            self.endTime = TimeViewController.scheduleTime
             let timeString = "\(time[0]).\(time[1]).\(time[2])-\(time[3]):\(time[4])"
             tableView.cellForRow(at: indexPath)?.textLabel?.text = timeString
             TimeViewController.scheduleTime.removeAll()
@@ -202,6 +219,100 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
         self.view.endEditing(true)
         self.itemTitle = textField.text
         return true
+    }
+
+}
+
+extension ViewController: KDDragAndDropCollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let collectionItem = [self.schedules, self.supSchedules]
+       return collectionItem[collectionView.tag].count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // swiftlint:disable:next force_cast
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCollectionViewCell", for: indexPath) as! TodayCollectionViewCell
+        let collectionItem = [self.schedules, self.supSchedules]
+        cell.label.text = collectionItem[collectionView.tag][indexPath.item].title
+        
+        cell.isHidden = false
+
+        if let kdCollectionView = collectionView as? KDDragAndDropCollectionView {
+
+            if let draggingPathOfCellBeingDragged = kdCollectionView.draggingPathOfCellBeingDragged {
+
+                if draggingPathOfCellBeingDragged.item == indexPath.item {
+
+                    cell.isHidden = true
+
+                }
+            }
+        }
+        return cell
+    }
+    // MARK: KDDragAndDropCollectionViewDataSource
+
+    func collectionView(_ collectionView: UICollectionView, dataItemForIndexPath indexPath: IndexPath) -> AnyObject {
+        let collectionItem = [self.schedules, self.supSchedules]
+        return collectionItem[collectionView.tag][indexPath.item] as AnyObject
+    }
+
+    func collectionView(_ collectionView: UICollectionView, insertDataItem dataItem: AnyObject, atIndexPath indexPath: IndexPath) {
+        let collectionItem = self.collectionItems[collectionView.tag]
+        switch collectionItem {
+        case .todayItems:
+            if let insertItem = dataItem as? Schedules {
+                schedules.insert(insertItem, at: indexPath.item)
+            }
+        case .supItems:
+            if let insertItem = dataItem as? Schedules {
+                supSchedules.insert(insertItem, at: indexPath.item)
+            }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) {
+
+        let collectionItem = self.collectionItems[collectionView.tag]
+        switch collectionItem {
+        case .todayItems:
+            schedules.remove(at: indexPath.item)
+        case .supItems:
+           supSchedules.remove(at: indexPath.item)
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, moveDataItemFromIndexPath from: IndexPath, toIndexPath to: IndexPath) {
+
+        let collectionItem = self.collectionItems[collectionView.tag]
+        switch collectionItem {
+        case .todayItems:
+            let fromDataItem: Schedules = schedules[from.item]
+            schedules.remove(at: from.item)
+            schedules.insert(fromDataItem, at: to.item)
+        case .supItems:
+            let fromDataItem: Schedules = supSchedules[from.item]
+            supSchedules.remove(at: from.item)
+            supSchedules.insert(fromDataItem, at: to.item)
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath? {
+
+        let collectionItem = [self.schedules, self.supSchedules]
+        if let candidate: Schedules = dataItem as? Schedules {
+            for item: Schedules in collectionItem[collectionView.tag] {
+                if candidate == item {
+                    let position = collectionItem[collectionView.tag].index(of: item)!
+                    let indexPath = IndexPath(item: position, section: 0)
+                    return indexPath
+                }
+            }
+        }
+        return nil
     }
 
 }

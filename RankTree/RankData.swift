@@ -24,31 +24,16 @@ class RankData {
             let monthStart = object.startTime[1]
             let dayStart = object.startTime[2]
 
-            var yearCount = yearEnd - yearStart
-            var monthCount = monthEnd - monthStart
-            var dayCount = dayEnd - dayStart
+            let yearCount = yearEnd - yearStart
+            let monthCount = monthEnd - monthStart
+            let dayCount = dayEnd - dayStart
             for yr in 0...yearCount {
                 for mth in 0...monthCount {
                     for dy in 0...dayCount {
 
-                        var groupInKey: String {
-                            guard
-                                let time = object.startTime[0] as? Int
-                                else { return " "}
-                            return String(time + yr)
-                        }
-                        var monthInKey: String {
-                            guard
-                                let time = object.startTime[1] as? Int
-                                else { return " "}
-                            return String(time + (mth % 12))
-                        }
-                        var dayInKey: String {
-                            guard
-                                let time = object.startTime[2] as? Int
-                                else { return " "}
-                            return String(time + (dy % 30))
-                        }
+                        let groupInKey: String = String(object.startTime[0] + yr)
+                        let monthInKey: String = String(object.startTime[1] + (mth % 12))
+                        let dayInKey: String = String(object.startTime[2] + (dy % 30))
                         if groupEntry[groupInKey] != nil {
                             if groupEntry[groupInKey]![monthInKey] != nil {
                                 if groupEntry[groupInKey]![monthInKey]?[dayInKey] != nil {

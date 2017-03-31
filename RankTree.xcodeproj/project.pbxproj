@@ -12,6 +12,8 @@
 		066046C81E8209B200149700 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046C71E8209B200149700 /* TimeViewController.swift */; };
 		066046CF1E826A6E00149700 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066046CE1E826A6E00149700 /* MapViewController.swift */; };
 		066424A71E8517440000DC83 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066424A61E8517440000DC83 /* DataService.swift */; };
+		069764DA1E8CB451005037B1 /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069764D91E8CB451005037B1 /* KDDragAndDropManager.swift */; };
+		069764DC1E8CB501005037B1 /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069764DB1E8CB501005037B1 /* KDDragAndDropCollectionView.swift */; };
 		069FC5E21E80BAC800012CE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E11E80BAC800012CE2 /* AppDelegate.swift */; };
 		069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069FC5E31E80BAC800012CE2 /* ViewController.swift */; };
 		069FC5E71E80BAC800012CE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069FC5E51E80BAC800012CE2 /* Main.storyboard */; };
@@ -20,6 +22,7 @@
 		069FC5EF1E80BAC800012CE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069FC5ED1E80BAC800012CE2 /* LaunchScreen.storyboard */; };
 		06B9B4F21E89EC1300AF3239 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9B4F11E89EC1300AF3239 /* Data.swift */; };
 		06B9B4F41E89F7AE00AF3239 /* RankData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9B4F31E89F7AE00AF3239 /* RankData.swift */; };
+		06E841981E8D135300C5891F /* TodayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E841971E8D135300C5891F /* TodayCollectionViewCell.swift */; };
 		473FCD0DE6DF975654F0ED5F /* Pods_RankTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2904CB10034DE6CF97C5DE94 /* Pods_RankTree.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,8 @@
 		066046C71E8209B200149700 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		066046CE1E826A6E00149700 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		066424A61E8517440000DC83 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		069764D91E8CB451005037B1 /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
+		069764DB1E8CB501005037B1 /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
 		069FC5DE1E80BAC800012CE2 /* RankTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RankTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069FC5E11E80BAC800012CE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		069FC5E31E80BAC800012CE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +44,7 @@
 		069FC5F01E80BAC800012CE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06B9B4F11E89EC1300AF3239 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		06B9B4F31E89F7AE00AF3239 /* RankData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankData.swift; sourceTree = "<group>"; };
+		06E841971E8D135300C5891F /* TodayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayCollectionViewCell.swift; sourceTree = "<group>"; };
 		2904CB10034DE6CF97C5DE94 /* Pods_RankTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RankTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6FF69B66639B4CC1B278CD2 /* Pods-RankTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankTree.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RankTree/Pods-RankTree.debug.xcconfig"; sourceTree = "<group>"; };
 		F7D9739578A023E64570D4F4 /* Pods-RankTree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RankTree.release.xcconfig"; path = "Pods/Target Support Files/Pods-RankTree/Pods-RankTree.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 		066046CD1E82498600149700 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				06E841971E8D135300C5891F /* TodayCollectionViewCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -117,6 +124,15 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
+		069764D81E8CB42A005037B1 /* KDDragAndDropCollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				069764D91E8CB451005037B1 /* KDDragAndDropManager.swift */,
+				069764DB1E8CB501005037B1 /* KDDragAndDropCollectionView.swift */,
+			);
+			name = KDDragAndDropCollectionViews;
+			sourceTree = "<group>";
+		};
 		069FC5D51E80BAC800012CE2 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +154,7 @@
 		069FC5E01E80BAC800012CE2 /* RankTree */ = {
 			isa = PBXGroup;
 			children = (
+				069764D81E8CB42A005037B1 /* KDDragAndDropCollectionViews */,
 				066424A51E85172D0000DC83 /* Firebase */,
 				066424A41E84FC880000DC83 /* Storyboard */,
 				066424A31E84FC6B0000DC83 /* other */,
@@ -308,11 +325,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E841981E8D135300C5891F /* TodayCollectionViewCell.swift in Sources */,
 				066046C81E8209B200149700 /* TimeViewController.swift in Sources */,
 				066424A71E8517440000DC83 /* DataService.swift in Sources */,
 				066046CF1E826A6E00149700 /* MapViewController.swift in Sources */,
 				069FC5EA1E80BAC800012CE2 /* RankTree.xcdatamodeld in Sources */,
 				069FC5E41E80BAC800012CE2 /* ViewController.swift in Sources */,
+				069764DA1E8CB451005037B1 /* KDDragAndDropManager.swift in Sources */,
+				069764DC1E8CB501005037B1 /* KDDragAndDropCollectionView.swift in Sources */,
 				066046C61E8130A400149700 /* Schedules.swift in Sources */,
 				06B9B4F41E89F7AE00AF3239 /* RankData.swift in Sources */,
 				069FC5E21E80BAC800012CE2 /* AppDelegate.swift in Sources */,
