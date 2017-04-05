@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import IBAnimatable
 
 enum Item: String {
     case title = "Title"
@@ -15,6 +16,7 @@ enum Item: String {
     case endTime = "End"
     case context = "Description"
     case level = "Level"
+    case location = "location"
 }
 
 enum CollectionItem {
@@ -25,13 +27,13 @@ enum CollectionItem {
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addItems: UIButton!
-    @IBOutlet weak var customView: UIView!
+    @IBOutlet weak var addItems: AnimatableButton!
+    @IBOutlet var customView: AnimatableView!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var todayCollectionView: UICollectionView!
     @IBOutlet weak var suppleCollectionView: UICollectionView!
-    
-    let items: [Item] = [.title, .context, .startTime, .endTime, .level]
+
+    let items: [Item] = [.title, .context, .startTime, .endTime, .location, .level]
     let collectionItems: [CollectionItem] = [.todayItems, .supItems]
     let date = Date()
     let calendar = Calendar.current
@@ -49,27 +51,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        Data().produceData() //Fake data
-        let year = String(calendar.component(.year, from: self.date))
-        let month = String(calendar.component(.month, from: self.date))
-//        let day = String(calendar.component(.day, from: self.date))
-        self.schedules = RankData().rankTime(year: year, month: month, day: "28")
         self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: [todayCollectionView, suppleCollectionView])
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
 
     func setUp() {
-
+        Data().produceData() //Fake data
+        let year = String(calendar.component(.year, from: self.date))
+        let month = String(calendar.component(.month, from: self.date))
+//        let day = String(calendar.component(.day, from: self.date))
+        self.schedules = RankData().rankTime(year: year, month: "3", day: "28")
         self.navigationItem.title = "RankTree"
         self.customView.isHidden = true
         self.customView.layer.borderWidth = 1.0
         self.customView.layer.borderColor = UIColor.gray.cgColor
         self.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
+        self.addItems.maskType = .circle
         self.addItems.addTarget(self, action: #selector(addSchedule), for: .touchUpInside)
     }
 
     func addSchedule(_ sender: Any) {
+        self.addItems.pop(repeatCount: 1)
+        self.customView.squeeze(.in, direction: .down)
         self.customView.isHidden = false
         self.view.addSubview(customView)
         self.customView.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 - 44)
@@ -77,10 +81,31 @@ class ViewController: UIViewController {
 
     @IBAction func cancell(_ sender: Any) {
 
-        self.customView.isHidden = true
+//        self.customView.isHidden = true
         self.tableView.reloadData()
+        self.customView.squeezeFade(.out, direction: .up)
     }
     func confirm(_ sender: Any) {
+
+        if (itemTitle == nil) || (startTime == nil) {
+            let alert = UIAlertController(title: "Oops", message: "You forget your title and start time!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                return
+            })
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        if endTime == nil {
+            self.endTime = self.startTime
+        }
+        if itemContext == nil {
+            self.itemContext = ""
+        }
+        if level == nil {
+            self.level = "Medium level"
+        }
+
         self.customView.isHidden = true
         let schedule = Schedules(title: self.itemTitle!, startTime: self.startTime!, endTime: self.endTime!, context: self.itemContext!, level: self.level!)
         Data.scheduleArray.append(schedule)
@@ -88,7 +113,8 @@ class ViewController: UIViewController {
         let year = String(calendar.component(.year, from: self.date))
         let month = String(calendar.component(.month, from: self.date))
 //        let day = String(calendar.component(.day, from: self.date))
-        self.schedules = RankData().rankTime(year: year, month: month, day: "28")
+        self.schedules = RankData().rankTime(year: year, month: "3", day: "28")
+        self.customView.squeezeFade(.out, direction: .down)
         self.supSchedules.removeAll()
         self.todayCollectionView.reloadData()
         self.suppleCollectionView.reloadData()
@@ -118,8 +144,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
             return 50
         case .level:
             return 50
+        case .location:
+            return 50
         }
-
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.items[indexPath.row]
@@ -145,6 +172,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
             cell.textLabel?.text = item.rawValue
         case .context:
             cell.textLabel?.text = item.rawValue
+        case .location:
+            cell.textLabel?.text = item.rawValue
         }
         return cell
     }
@@ -160,6 +189,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITextFiel
         case .endTime:
             guard let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "TimeViewController") as? TimeViewController
                 else { return }
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        case .location:
+            guard let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
             self.navigationController?.pushViewController(secondViewController, animated: true)
         case .level:
             let alert = UIAlertController(title: "Level", message: "Choose level!", preferredStyle: .actionSheet)
@@ -235,9 +267,9 @@ extension ViewController: KDDragAndDropCollectionViewDataSource, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCollectionViewCell", for: indexPath) as! TodayCollectionViewCell
         let collectionItem = [self.schedules, self.supSchedules]
         cell.label.text = collectionItem[collectionView.tag][indexPath.item].title
-        
+        cell.numberLabel.text = String(indexPath.item + 1)
         cell.isHidden = false
-
+        cell.layer.cornerRadius = 10.0
         if let kdCollectionView = collectionView as? KDDragAndDropCollectionView {
 
             if let draggingPathOfCellBeingDragged = kdCollectionView.draggingPathOfCellBeingDragged {
@@ -271,9 +303,7 @@ extension ViewController: KDDragAndDropCollectionViewDataSource, UICollectionVie
             }
         }
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) {
 
         let collectionItem = self.collectionItems[collectionView.tag]
@@ -316,9 +346,9 @@ extension ViewController: KDDragAndDropCollectionViewDataSource, UICollectionVie
         }
         return nil
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         let collectionItem = [self.schedules, self.supSchedules]
         let title = collectionItem[collectionView.tag][indexPath.item].title
         let startTime = collectionItem[collectionView.tag][indexPath.item].startTime
@@ -329,7 +359,7 @@ extension ViewController: KDDragAndDropCollectionViewDataSource, UICollectionVie
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
-        
+
     }
 
 }

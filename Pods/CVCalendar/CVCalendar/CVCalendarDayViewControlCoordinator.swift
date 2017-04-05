@@ -92,5 +92,29 @@ extension CVCalendarDayViewControlCoordinator {
 
     public func performDayViewRangeSelection(_ dayView: DayView) {
         print("Day view range selection found")
+        selectionSet.insert(dayView)
+        
+        
+        if selectionSet.count > 1 {
+            //            let count = selectionSet.count-1
+            for dayViewInQueue in selectionSet {
+                if dayView != dayViewInQueue {
+                    if dayView.calendarView != nil {
+//                        presentDeselectionOnDayView(dayViewInQueue)
+                        presentSelectionOnDayView(dayViewInQueue)
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        if let _ = animator {
+            if selectedDayView != dayView {
+                selectedDayView = dayView
+                presentSelectionOnDayView(dayView)
+            }
+        }
+
     }
 }

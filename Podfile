@@ -10,4 +10,7 @@ target 'RankTree' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'GoogleMaps'
+  pod 'EasyAnimation'
+  pod 'IBAnimatable'
 end

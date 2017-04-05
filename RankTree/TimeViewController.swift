@@ -13,9 +13,12 @@ class TimeViewController: UIViewController {
 
     @IBOutlet weak var theTime: UILabel!
     let menuView = CVCalendarMenuView()
-    let calendarView = CVCalendarView()
+    var calendarView = CVCalendarView()
+    var currentCalendar: Calendar!
     static var scheduleTime: [Int] = []
     var timeArray: [Int] = []
+
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
@@ -25,8 +28,11 @@ class TimeViewController: UIViewController {
     }
 
     func setUp() {
+
+        self.currentCalendar = Calendar.init(identifier: .gregorian)
+        self.title = CVDate(date: Date(), calendar: currentCalendar).globalDescription
         self.menuView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 15)
-        self.calendarView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 250)
+        self.calendarView.frame = CGRect(x: 0, y: 30, width: self.view.frame.width, height: 400)
         self.view.addSubview(self.menuView)
         self.view.addSubview(self.calendarView)
 
@@ -55,6 +61,19 @@ class TimeViewController: UIViewController {
 
 }
 extension TimeViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+
+    func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool {
+        return true
+    }
+
+    func shouldShowCustomSingleSelection() -> Bool {
+        return false
+    }
+
+    func shouldAutoSelectDayOnMonthChange() -> Bool {
+        return false
+    }
+
     func presentationMode() -> CalendarMode {
         return .monthView
     }
@@ -65,12 +84,19 @@ extension TimeViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
         self.navigationItem.title = date.globalDescription
     }
 
+    func didSelectRange(from startDayView: DayView, to endDayView: DayView) {
+        // 创建一个日期格式器
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日"
+    }
+
     func didSelectDayView(_ dayView: DayView, animationDidFinish: Bool) {
         let alert = UIAlertController(title: "Select time", message: "\n\n\n\n\n", preferredStyle: .actionSheet)
         let datePickerView = UIDatePicker(frame: CGRect(x: 0, y: 50, width: alert.view.frame.width, height: 100))
         TimeViewController.scheduleTime.removeAll()
         datePickerView.datePickerMode = .time
         datePickerView.date = Date()
+        datePickerView.minuteInterval = 30
         datePickerView.addTarget(self, action: #selector(self.timeChanged), for: .valueChanged)
         alert.view.addSubview(datePickerView)
         let okAction = UIAlertAction(title: "Confirm", style: .default, handler: { _ in
@@ -102,5 +128,4 @@ extension TimeViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
         self.timeArray.append(hour!)
         self.timeArray.append(minute!)
     }
-
 }

@@ -10,4 +10,6 @@ import UIKit
 
 class TodayCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+
 }

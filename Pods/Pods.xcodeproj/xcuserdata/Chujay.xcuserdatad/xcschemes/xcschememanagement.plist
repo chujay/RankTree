@@ -9,12 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>EasyAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IBAnimatable.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,7 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1B7E9280AEEC73F5945D31FFCE2F3F2B</key>
+		<key>3C3109B7C4BF2E519F19547CFBA90863</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3C271CE6119E785525D3573D37D903D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -43,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>E2EF0A874A01FFC4D77FBAEED4802A12</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBA73DC81174733707FC186EB1F8CFCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
